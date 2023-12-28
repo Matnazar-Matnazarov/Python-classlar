@@ -6,9 +6,9 @@ class Shaxs:
         self.manzili=manzili
         self.telefon=telefon
     def __repr__(self) -> str:
-        return f'nomi : {self.nomi}\nfamiliyasi : {self.familiya}\n'
+        return f'ism : {self.ism}\nfamiliyasi : {self.familiya}\n'
     def get_info(self):
-        return f'nomi : {self.nomi}\nmanzili : {self.manzili}\n'
+        return f'ism : {self.ism}\nmanzili : {self.manzili}\n'
     def __call__(self):
         return self.manzili
 class Foydalanuvchi(Shaxs):
