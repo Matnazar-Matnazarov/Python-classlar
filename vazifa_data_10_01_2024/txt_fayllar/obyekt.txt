@@ -1,0 +1,6 @@
+bu obyekt 
+fayl
+faqat uyg'otish uchun
+yaratildi
+python fayl bu
+classlar uchun
