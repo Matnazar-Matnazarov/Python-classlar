@@ -1,0 +1,2 @@
+mysql-connector-python==8.3.0
+mysqlclient==2.2.1
