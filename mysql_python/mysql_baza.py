@@ -65,14 +65,24 @@ class Database:
     def insert_uqituvchilar(self,ism,familiya,yunalishi,tel):
         sq=f"INSERT INTO uqituvchilar (ism,familiya,yunalishi,tel_raqami) VALUES ('{ism}','{familiya}','{yunalishi}','{tel}')"
         self.ishlatish(sq,commit=True)
-    def insert_tulov(self,ism, familiya, tulov, kurs_nomi):
-        s1=f"SELECT id FROM uquvchilar WHERE ism='{ism}' AND familiya='{familiya}"
-        id=str(self.ishlatish(s1,fetchone=True))
+    def fio(self,ism,familiya):
+        s1 = f"SELECT id FROM uquvchilar WHERE ism='{ism}' AND familiya='{familiya}'"
+        return self.ishlatish(s1, fetchone=True)
+    def uqituvchi_fio(self,ism,familiya):
+        s1 = f"SELECT id FROM uqituvchilar WHERE ism='{ism}' AND familiya='{familiya}'"
+        return self.ishlatish(s1, fetchone=True)
+    def kurs_id(self,kurs_nomi):
         s2=f"SELECT id FROM kurslar WHERE kurs_nomi='{kurs_nomi}'"
-        kurs_id=str(self.ishlatish(s2,fetchone=True))
-        vaqti=datetime.datetime.now()
-        vaqti=str(vaqti)
-        sq=f"INSERT INTO tulovlar (uquvchi_id,tulov,kurs_id,vaqti) VALUES ('{id}',{tulov},'{kurs_id}','{vaqti}')"
+        return self.ishlatish(s2,fetchone=True)
+    def insert_tulov(self,ism, familiya, tulov, kurs_nomi):
+        id=self.fio(ism,familiya)
+        kurs_id=self.kurs_id(kurs_nomi)
+        vaqti=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        sq=f"INSERT INTO tulovlar (uquvchi_id,tulov,kurs_id,vaqti) VALUES ({id[0]},{tulov},{kurs_id[0]},'{vaqti}')"
+        self.ishlatish(sq,commit=True)
+    def change_dars_vaqti(self,ism, familiya, new_vaqt):
+        s1=self.uqituvchi_fio(ism,familiya)
+        sq=f"UPDATE uqituvchi_kurslari SET vaqti='{new_vaqt}' WHERE uqituvchi_id={s1[0]}"
         self.ishlatish(sq,commit=True)
     def ishlatish(self,sql,fetchall=False,fetchone=False,commit=False):
         date=None
