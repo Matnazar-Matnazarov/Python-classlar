@@ -1,0 +1,7 @@
+pip~=23.3.2
+lxml~=5.1.0
+typing_extensions~=4.9.0
+setuptools~=65.5.0
+python-docx ==1.1.0
+lxml==5.1.0
+
