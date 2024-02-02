@@ -1,0 +1,5 @@
+pip~=23.3.2
+asyncpg~=0.29.0
+setuptools~=65.5.0
+async-timeout==4.0.3
+asyncpg==0.29.0
